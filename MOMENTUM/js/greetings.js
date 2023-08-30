@@ -1,3 +1,6 @@
+//element 찾기
+//event를 listen
+//그 event에 반응하기
 // 1.유저가 form에 아이디를 입력하면 받아오고 싶다.
 const loginForm = document.querySelector('#login-form')
 const loginInput = document.querySelector('#login-form input')

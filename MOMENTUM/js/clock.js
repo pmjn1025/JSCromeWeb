@@ -20,12 +20,13 @@ function getClock() {
   const minutes = String(date.getMinutes()).padStart(2, '0')
   const seconds = String(date.getSeconds()).padStart(2, '0')
 
-  console.log(`${date.getHours()} : ${date.getMinutes()} :${date.getSeconds()}`)
+  //console.log(`${date.getHours()} : ${date.getMinutes()} :${date.getSeconds()}`)
   const randomColor = getRandomColor()
   clock.style.color = randomColor
   clock.innerText = `${hours} : ${minutes} :${seconds}`
   //clock.innerText = hour + ':' + minute + ':' + seconds.padStart(2, '0')
 }
+// 먼저 시작해주어야지 바로 실행(출력)된다
 getClock()
 // 반복해서 화면에 출력해주는 setInterval 매개변수는 2개 하나는 출력하려는 함수, 하나는 시간(간격) 밀리세컨드
 setInterval(getClock, 1000)
