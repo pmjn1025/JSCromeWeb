@@ -36,6 +36,8 @@ const resltArr = [rsltAdd, rsltMinus, rsltMultify, rsltDivide, rsltPowerOf]
 // resltArr.push = rsltDivide
 // resltArr.push = rsltPowerOf
 
+console.log(resltArr)
+
 for (let index = 0; index < resltArr.length; index++) {
   const element = resltArr[index]
 

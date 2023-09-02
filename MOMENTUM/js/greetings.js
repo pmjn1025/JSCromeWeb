@@ -6,6 +6,8 @@ const loginForm = document.querySelector('#login-form')
 const loginInput = document.querySelector('#login-form input')
 const greetingH1 = document.querySelector('#greeting')
 const logoutBtn = document.querySelector('#logout')
+const todoform = document.querySelector('#todo-form')
+const todolist = document.querySelector('#todo-list')
 
 // ****** 자주 쓰이는 데이터(String,number)는 상수화 시켜서 관리(어디에 적용되어있는지 잘보기) ******
 const HIDDEN_CLASSNAME = 'hidden'
@@ -54,12 +56,29 @@ function onLoginSubmit(event) {
   paintGreeting(userName)
   //paintGreeting(saveUserName)
   //console.log(event)
+  location.reload() // --> ** reload()해주어야 다른 사용자 별로 todolist조회가 가능하다.
 }
 
 // 4.중복된 코드들을 함수화
 function paintGreeting(userName) {
   greetingH1.classList.remove(HIDDEN_CLASSNAME)
-  greetingH1.innerText = `hello! ${userName}` // --> 이걸 잘쓰자
+
+  todoform.classList.remove(HIDDEN_CLASSNAME)
+
+  todolist.classList.remove(HIDDEN_CLASSNAME)
+
+  const date = new Date()
+  const hours = date.getHours()
+  console.log(typeof hours)
+
+  if (hours > 0 && hours < 12) {
+    greetingH1.innerText = `Good Morning, ${userName}` // --> 이걸 잘쓰자
+  } else if (hours >= 12 && hours < 18) {
+    greetingH1.innerText = `Good Afternoon, ${userName}` // --> 이걸 잘쓰자
+  } else if (hours >= 18 && hours < 24) {
+    greetingH1.innerText = `Good Evening, ${userName}` // --> 이걸 잘쓰자
+  }
+
   logoutBtn.classList.remove(HIDDEN_CLASSNAME)
   logoutBtn.addEventListener('click', onLogout)
 }

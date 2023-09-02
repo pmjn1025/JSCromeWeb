@@ -21,9 +21,12 @@ function getClock() {
   const seconds = String(date.getSeconds()).padStart(2, '0')
 
   //console.log(`${date.getHours()} : ${date.getMinutes()} :${date.getSeconds()}`)
-  const randomColor = getRandomColor()
-  clock.style.color = randomColor
-  clock.innerText = `${hours} : ${minutes} :${seconds}`
+  //const randomColor = getRandomColor()
+  //clock.style.color = randomColor
+  //clock.innerText = `${hours} : ${minutes} :${seconds}`
+
+  clock.innerText = ` ${hours} : ${minutes}`
+
   //clock.innerText = hour + ':' + minute + ':' + seconds.padStart(2, '0')
 }
 // 먼저 시작해주어야지 바로 실행(출력)된다

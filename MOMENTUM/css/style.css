@@ -2,6 +2,123 @@
   display: none;
 }
 
-/* #clock {
-  transition: color 0.5s ease-in-out;
-} */
+#background {
+  position: fixed; /* 이미지를 고정된 위치에 표시합니다.*/
+  top: 0;
+  left: 0;
+  width: 100%; /*가로 폭을 100%로 설정하여 화면 가득 채우도록 합니다.*/
+  height: 100%; /*  세로 높이도 100%로 설정합니다.*/
+  z-index: -1; /* 배경 이미지를 다른 요소 뒤에 표시합니다.*/
+  opacity: 0.8;
+}
+
+.mainContain {
+  text-align: center; /* 텍스트를 가운데 정렬합니다. */
+  position: fixed; /* 요소를 화면에 고정시킵니다. */
+  top: 50%; /* 화면 상단에서 50% 위치에 배치합니다. */
+  left: 50%; /* 화면 왼쪽에서 50% 위치에 배치합니다. */
+  transform: translate(-50%, -60%); /* 요소를 중앙으로 이동시킵니다. */
+  max-height: 280px; /* 컨테이너의 최대 높이를 설정합니다. */
+
+  /* 다른 스타일 속성 추가 및 조절 가능 */
+}
+
+#clock {
+  color: #c2b280;
+  font-size: 10vw; /* 원하는 폰트 크기로 설정합니다.
+  -vw : vw는 Viewport Width를 약자 브라우저 크기에 반응하여 알아서 바뀌게 할 수 있다.*/
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /*transition: color 0.5s ease-in-out;*/
+}
+
+#greeting {
+  color: #d2691e;
+  font-size: 4vw;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* #clockImg {
+  margin-right: 10px;  이미지와 텍스트 사이의 간격을 조절합니다. 
+}
+ */
+
+#quotes {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden; /* 텍스트 넘침 숨김 */
+  white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+  width: auto; /* 너비 자동 조절 */
+  font-size: 1.2vw;
+  background-color: #0067a3;
+  color: white;
+  /* 다른 스타일 속성 추가 및 조절 가능 */
+}
+
+#weather {
+  position: fixed;
+  top: 0;
+  right: 10px;
+  font-size: 1.5vw;
+  color: white;
+  /* 다른 스타일 속성 추가 및 조절 가능 */
+}
+
+#todo-list {
+  list-style-type: none; /*  앞에 붙는 점을 없앰 */
+  max-height: 19vw; /* ul의 최대 높이를 10px로 설정 */
+  overflow-y: auto; /* 세로 스크롤바를 표시하여 내용을 스크롤할 수 있게 함 */
+}
+
+#todo-list > li > span {
+  /* 여기에 스타일 속성을 추가하세요 */
+  font-size: 1.2vw;
+}
+
+#todo-list > li > button {
+  /* 여기에 스타일 속성을 추가하세요 */
+  padding: 0.5vw 0.5vw;
+}
+
+#login-input {
+  border: none; /* 기본 테두리 제거 */
+  border-bottom: 2px solid #000; /* 밑줄 스타일 및 색상 설정 */
+  background-color: transparent; /* 배경색 투명으로 설정 */
+  outline: none; /* 클릭 시 테두리 제거 */
+  font-size: 2vw;
+  width: 35vw;
+  height: 2vw;
+}
+
+#login-input::placeholder {
+  color: #000; /* 검정색으로 플레이스홀더 텍스트 색상 설정 */
+  font-size: 10px;
+  font-size: 2vw;
+}
+
+#todo-input {
+  border: none; /* 기본 테두리 제거 */
+  border-bottom: 2px solid #000; /* 밑줄 스타일 및 색상 설정 */
+  background-color: transparent; /* 배경색 투명으로 설정 */
+  outline: none; /* 클릭 시 테두리 제거 */
+  font-size: 2vw;
+  width: 35vw;
+  height: 2vw;
+  /* 다른 스타일 속성 추가 및 조절 가능 */
+}
+
+#todo-input::placeholder {
+  color: #000; /* 검정색으로 플레이스홀더 텍스트 색상 설정 */
+  font-size: 10px;
+  font-size: 1.5vw;
+}
+
+#logout {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}

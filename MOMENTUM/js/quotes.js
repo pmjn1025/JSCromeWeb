@@ -75,4 +75,4 @@ console.log(quotes[quotesSeq].author)
 console.log(quotes[quotesSeq].quote)
 
 quote.innerText = printQuote
-author.innerText = printAuthor
+author.innerText = ' - ' + printAuthor

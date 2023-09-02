@@ -1,3 +1,5 @@
+// 2023.09.01 --> 로그인 유저별 todoList 출력해보기
+
 // 2023.08.30 / SaGo_Muncci / todo이게 momentum의 핵심기능이다. 중요!
 // client에서는 화면을 기능(보여줄것,디자인)별로 부분 부분으로 나누고 뼈대를 세운다.(html)
 // 부분마다 필요한 기능 및 데이터를 js로 개발한다.
@@ -7,19 +9,24 @@
 const toDoForm = document.querySelector('#todo-form')
 const toDoInput = toDoForm.querySelector('input')
 const toDoList = document.querySelector('#todo-list')
+const h1Greeting = document.querySelector('h1#greeting')
 
 const TODOS_KEY = 'todos'
 
 // 이렇게 하면 새로고침 할때마다 todos의 값은 빈값으로 시작한다. 그러나 localStorage에는 저장되어있다.
 // 보이는것만 새로고침해서 빈 배열로 보이는 것이다.
 //const todos = []
-// 따라서 변수를 재할당 할수 있는 let으로 변경하자.
+// 따라서 변수를 재할당 할수 있는 "let"으로 변경하자.
 let todos = []
 
+//newTodo --> toDoInput.value 에서
+//        --> newTodoObj객체로 변경
 function paintToDo(newTodo) {
   const liTodo = document.createElement('li')
+  liTodo.id = newTodo.id
   const spanTodo = document.createElement('span')
-  spanTodo.innerText = newTodo
+  //spanTodo.innerText = newTodo
+  spanTodo.innerText = newTodo.text //--> newTodoObj객체로 변경
   const toDoBtn = document.createElement('button')
   toDoBtn.innerText = '✖'
   toDoBtn.addEventListener('click', deleteToDo)
@@ -38,8 +45,19 @@ function deleteToDo(event) {
   //const btnParent = toDoBtn.parentElement
   console.log(event.target)
   console.dir(event.target.parentElement.innerText)
+  //const rmBtnPerntLi = event.target.parentElement
   const rmBtnPerntLi = event.target.parentElement
+  console.log(rmBtnPerntLi.id)
+  console.log(typeof rmBtnPerntLi.id)
   rmBtnPerntLi.remove()
+
+  // **JS에서 지우고 싶은 아이템은 제외한다
+  // --> 지우고싶은 아이템을 제외하고 새로운 배열을 만드는 것이다.
+  // 데이터 타입때문에 안지워짐
+  //todos = todos.filter((todos) => todos.id !== rmBtnPerntLi.id)
+  todos = todos.filter((todos) => todos.id !== parseInt(rmBtnPerntLi.id))
+  // 지우고 변경된 todos를 다시 저장
+  saveTodo()
 }
 
 function saveTodo() {
@@ -55,11 +73,26 @@ function saveTodo() {
 function handleToDoList(event) {
   event.preventDefault()
   const newTodo = toDoInput.value
+
+  const greetingText = h1Greeting.innerText.split(',')
+  const userName = greetingText[1].replace(' ', '')
+  console.log(greetingText[1].replace(' ', ''))
+
   console.log(newTodo)
-  todos.push(newTodo)
+  // localstorage에 저장한 후 삭제시 만약 newtodo의 값이 같으면
+  // 클라이언트 측에서 버튼의 부모 엘리먼트의 정보를 target해서 해당 엘리먼트를 삭제할수 있으나
+  // DB는 그렇지 않다.
+  // 따라서 db에 저장시 키- 값 쌍인 객체를 생성해서 배열에 저장해주자.
+  //todos.push(newTodo)
+  const newTodoObj = {
+    userName: userName,
+    text: newTodo,
+    id: Date.now(),
+  }
+  todos.push(newTodoObj)
   toDoInput.value = ''
   saveTodo()
-  paintToDo(newTodo)
+  paintToDo(newTodoObj)
 }
 
 toDoForm.addEventListener('submit', handleToDoList) // --> sub밋을 눌러야 작동 새로고침하면 안탄다.
@@ -68,6 +101,7 @@ toDoForm.addEventListener('submit', handleToDoList) // --> sub밋을 눌러야 �
 function sayhello(item) {
   console.log('itemSeq', item)
 }
+
 // 새로고침 하면 이것 부터 탄다
 const saveTodos = localStorage.getItem(TODOS_KEY)
 console.log(saveTodos)
@@ -77,14 +111,24 @@ if (saveTodos !== null) {
   console.log(parsedTodos)
   // 이전에 저장되어있던것을 변수(let todos)에 재할당해주자.
   todos = parsedTodos
+
+  const greetingText = h1Greeting.innerText.split(',')
+  const userName = greetingText[1].replace(' ', '')
+
+  console.log(parsedTodos)
+  console.log(userName)
+
   /* 중요 */
   //parsedTodos.forEach((item) => console.log('itemSeq', item)) //-->  이것과
-  parsedTodos.forEach(paintToDo) //--> foreach 이것과
+  //parsedTodos.forEach(paintToDo) //--> foreach 이것과
+
   // 이것은 같다
-  //   for (let index = 0; index < parsedTodos.length; index++) {
-  //     const element = parsedTodos[index]
-  //     paintToDo(element)
-  //   }
+  for (let index = 0; index < parsedTodos.length; index++) {
+    if (parsedTodos[index].userName === userName) {
+      const element = parsedTodos[index]
+      paintToDo(element)
+    }
+  }
 }
 
 // 내생각 대로 짜본것

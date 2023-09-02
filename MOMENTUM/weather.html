@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Momentum App</title>
+  </head>
+  <body>
+    <h2 id="clock">00:00</h2>
+    <!-- 정규식 넣어보기.... but 최근의 로그인 시스템은 토큰으로 구글로그인, 네이버로그인, 카톡로그인을 사용한다....... -->
+    <form class="hidden" id="login-form">
+      <input
+        type="text"
+        required
+        maxlength="15"
+        placeholder="what is your name?"
+      />
+      <!-- input태그로 submit가 발동될때 새로고침후 form을 submit하도록 브라우저에 프로그래밍되어있다. -->
+      <input type="submit" value="Log-In" />
+      <!-- <button>Log in</button> -->
+    </form>
+    <!-- login After start -->
+    <h1 class="hidden" id="greeting"></h1>
+    <button class="hidden" id="logout">Log-Out</button>
+    <form id="todo-form">
+      <input
+        type="text"
+        placeholder="할일 목록을 작성하신 후 엔터를 입력해주세요"
+        required
+      />
+    </form>
+    <ul id="todo-list"></ul>
+    <!-- login After end -->
+    <!-- 명언 start -->
+    <div id="quotes">
+      <span></span>
+      <span></span>
+    </div>
+    <div id="weather">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <!-- 명언 end -->
+    <script src="js/greetings.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/weather.js"></script>
+  </body>
+</html>
